@@ -1,0 +1,95 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Student {
+    private String name;
+    private int rollNo;
+    private String course;
+
+    public Student(String name, int rollNo, String course) {
+        this.name = name;
+        this.rollNo = rollNo;
+        this.course = course;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getRollNo() {
+        return rollNo;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + ", Roll No: " + rollNo + ", Course: " + course;
+    }
+}
+
+class StudentManagementSystem {
+    private ArrayList<Student> students;
+
+    public StudentManagementSystem() {
+        students = new ArrayList<>();
+    }
+
+    public void addStudent(Student student) {
+        students.add(student);
+        System.out.println("Student added successfully.");
+    }
+
+    public void displayStudents() {
+        if (students.isEmpty()) {
+            System.out.println("No students found.");
+            return;
+        }
+        System.out.println("List of Students:");
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        StudentManagementSystem sms = new StudentManagementSystem();
+
+        while (true) {
+            System.out.println("\nStudent Management System");
+            System.out.println("1. Add Student");
+            System.out.println("2. Display Students");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter roll no: ");
+                    int rollNo = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+                    System.out.print("Enter course: ");
+                    String course = scanner.nextLine();
+                    Student student = new Student(name, rollNo, course);
+                    sms.addStudent(student);
+                    break;
+                case 2:
+                    sms.displayStudents();
+                    break;
+                case 3:
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter again.");
+            }
+        }
+    }
+}
